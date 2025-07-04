@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Text-to-Video Creator | AI Video Generator</title>
+    <meta name="description" content="Transform your text into professional videos with our AI-powered text-to-video creator. Customizable templates, advanced editing, and seamless sharing.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --primary-light: #4895ef;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --dark: #212529;
+            --dark-gray: #495057;
+            --medium-gray: #6c757d;
+            --light-gray: #e9ecef;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --success: #4bb543;
+            --warning: #f0ad4e;
+            --danger: #d9534f;
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --box-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--primary);
+        }
+
+        .logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 24px;
+            color: var(--dark);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+            padding: 100px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* Tool Section */
+        .tool-section {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .panel {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+        }
+
+        .panel-header {
+            padding: 20px;
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .panel-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark-gray);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            font-family: inherit;
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: var(--light);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+        }
+
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+        }
+
+        /* Creation Level */
+        .creation-level {
+            margin-bottom: 30px;
+        }
+
+        .level-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .level-option {
+            position: relative;
+        }
+
+        .level-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .level-option label {
+            display: block;
+            padding: 15px;
+            background-color: var(--light);
+            border-radius: var(--border-radius-sm);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .level-option input:checked + label {
+            background-color: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .level-option .level-icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .level-option .level-name {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .level-option .level-desc {
+            display: block;
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        /* Video Preview */
+        .video-preview-container {
+            position: relative;
+        }
+
+        .video-preview {
+            background-color: var(--dark);
+            border-radius: var(--border-radius-sm);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-preview video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .video-placeholder {
+            text-align: center;
+            color: var(--medium-gray);
+            padding: 30px;
+        }
+
+        .video-placeholder-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--primary-light);
+            opacity: 0.7;
+        }
+
+        .video-placeholder-text {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .video-placeholder-subtext {
+            font-size: 14px;
+            opacity: 0.7;
+        }
+
+        .video-controls {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 28px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--light);
+            color: var(--dark-gray);
+            border: 1px solid var(--light-gray);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--light-gray);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: var(--white);
+        }
+
+        .btn-accent:hover {
+            background-color: #3aa8d8;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-lg {
+            padding: 18px 36px;
+            font-size: 18px;
+        }
+
+        .btn-block {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin: 30px 0;
+            display: none;
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+
+        /* Advanced Options */
+        .advanced-options {
+            margin-top: 30px;
+            border-top: 1px solid var(--light-gray);
+            padding-top: 30px;
+        }
+
+        .advanced-options-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 10px 0;
+            font-weight: 600;
+            color: var(--dark-gray);
+            cursor: pointer;
+        }
+
+        .advanced-options-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .advanced-options.active .advanced-options-content {
+            max-height: 1000px;
+            margin-top: 20px;
+        }
+
+        /* Template Selector */
+        .template-selector {
+            margin: 25px 0;
+        }
+
+        .template-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .template-option {
+            position: relative;
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .template-option input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .template-option-preview {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .template-option input:checked + .template-option-preview {
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .template-option input:checked + .template-option-preview::after {
+            content: '\f00c';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        .template-option-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            color: white;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .feature-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--box-shadow-lg);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        .footer-logo-icon {
+            font-size: 24px;
+            color: var(--accent);
+        }
+
+        .footer-logo-text {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--white);
+        }
+
+        .footer-about {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            color: var(--white);
+            font-size: 18px;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--white);
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--light-gray);
+            text-decoration: none;
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            text-align: center;
+            opacity: 0.7;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .template-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .tool-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .level-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .header-actions {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .feature-card {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 12px 20px;
+            }
+            
+            .btn-lg {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+            
+            .template-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .video-controls {
+                flex-direction: column;
+            }
+            
+            .video-controls .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-film"></i>
+                </div>
+                <span class="logo-text">VidCraft</span>
+            </a>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#templates">Templates</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="#" class="btn btn-secondary">Log In</a>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title animate__animated animate__fadeInDown">AI-Powered Text-to-Video Creator</h1>
+            <p class="hero-subtitle animate__animated animate__fadeInDown animate__delay-1s">Transform your ideas into stunning videos in minutes with our advanced AI technology. No design skills required.</p>
+            <div class="animate__animated animate__fadeInUp animate__delay-2s">
+                <a href="#tool" class="btn btn-accent btn-lg">
+                    <i class="fas fa-play-circle"></i> Start Creating
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Text-to-Video Tool Section -->
+    <section class="tool-section" id="tool">
+        <div class="container">
+            <h2 class="section-title">Create Your Video</h2>
+            
+            <div class="tool-container">
+                <!-- Input Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <i class="fas fa-edit"></i> Video Content
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="video-title" class="form-label">Video Title</label>
+                            <input type="text" id="video-title" class="form-control" placeholder="My Awesome Video">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="video-text" class="form-label">Your Content</label>
+                            <textarea id="video-text" class="form-control" placeholder="Paste your text here or write your script..."></textarea>
+                        </div>
+                        
+                        <div class="creation-level">
+                            <label class="form-label">Creation Level</label>
+                            <p>Select the complexity level to optimize processing time and video quality</p>
+                            
+                            <div class="level-options">
+                                <div class="level-option">
+                                    <input type="radio" id="level-basic" name="creation-level" value="basic" checked>
+                                    <label for="level-basic">
+                                        <span class="level-icon"><i class="fas fa-bolt"></i></span>
+                                        <span class="level-name">Basic</span>
+                                        <span class="level-desc">Fast & Simple</span>
+                                    </label>
+                                </div>
+                                <div class="level-option">
+                                    <input type="radio" id="level-standard" name="creation-level" value="standard">
+                                    <label for="level-standard">
+                                        <span class="level-icon"><i class="fas fa-star"></i></span>
+                                        <span class="level-name">Standard</span>
+                                        <span class="level-desc">Balanced</span>
+                                    </label>
+                                </div>
+                                <div class="level-option">
+                                    <input type="radio" id="level-premium" name="creation-level" value="premium">
+                                    <label for="level-premium">
+                                        <span class="level-icon"><i class="fas fa-gem"></i></span>
+                                        <span class="level-name">Premium</span>
+                                        <span class="level-desc">Enhanced</span>
+                                    </label>
+                                </div>
+                                <div class="level-option">
+                                    <input type="radio" id="level-pro" name="creation-level" value="pro">
+                                    <label for="level-pro">
+                                        <span class="level-icon"><i class="fas fa-rocket"></i></span>
+                                        <span class="level-name">Pro</span>
+                                        <span class="level-desc">Highest Quality</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="template-selector">
+                            <label class="form-label">Video Template</label>
+                            <div class="template-options">
+                                <div class="template-option">
+                                    <input type="radio" id="template-presentation" name="video-template" value="presentation" checked>
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/4361ee/ffffff?text=Presentation')">
+                                        <span class="template-option-label">Presentation</span>
+                                    </div>
+                                </div>
+                                <div class="template-option">
+                                    <input type="radio" id="template-social" name="video-template" value="social">
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/f72585/ffffff?text=Social+Media')">
+                                        <span class="template-option-label">Social Media</span>
+                                    </div>
+                                </div>
+                                <div class="template-option">
+                                    <input type="radio" id="template-educational" name="video-template" value="educational">
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/4cc9f0/ffffff?text=Educational')">
+                                        <span class="template-option-label">Educational</span>
+                                    </div>
+                                </div>
+                                <div class="template-option">
+                                    <input type="radio" id="template-marketing" name="video-template" value="marketing">
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/4895ef/ffffff?text=Marketing')">
+                                        <span class="template-option-label">Marketing</span>
+                                    </div>
+                                </div>
+                                <div class="template-option">
+                                    <input type="radio" id="template-news" name="video-template" value="news">
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/3a0ca3/ffffff?text=News')">
+                                        <span class="template-option-label">News</span>
+                                    </div>
+                                </div>
+                                <div class="template-option">
+                                    <input type="radio" id="template-custom" name="video-template" value="custom">
+                                    <div class="template-option-preview" style="background-image: url('https://via.placeholder.com/300x169/495057/ffffff?text=Custom')">
+                                        <span class="template-option-label">Custom</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="advanced-options">
+                            <button class="advanced-options-toggle">
+                                <span>Advanced Options</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="advanced-options-content">
+                                <div class="form-group">
+                                    <label for="voice-over" class="form-label">Voice Over</label>
+                                    <select id="voice-over" class="form-control">
+                                        <option value="none">No Voice Over</option>
+                                        <option value="male-1">Male Voice 1</option>
+                                        <option value="male-2">Male Voice 2</option>
+                                        <option value="female-1">Female Voice 1</option>
+                                        <option value="female-2">Female Voice 2</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="background-music" class="form-label">Background Music</label>
+                                    <select id="background-music" class="form-control">
+                                        <option value="none">No Music</option>
+                                        <option value="upbeat">Upbeat</option>
+                                        <option value="calm">Calm</option>
+                                        <option value="corporate">Corporate</option>
+                                        <option value="electronic">Electronic</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="aspect-ratio" class="form-label">Aspect Ratio</label>
+                                    <select id="aspect-ratio" class="form-control">
+                                        <option value="16:9">16:9 (Widescreen)</option>
+                                        <option value="1:1">1:1 (Square)</option>
+                                        <option value="9:16">9:16 (Vertical)</option>
+                                        <option value="4:5">4:5 (Social Media)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button id="generate-btn" class="btn btn-primary btn-block">
+                            <i class="fas fa-magic"></i> Generate Video
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Output Panel -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <i class="fas fa-play-circle"></i> Video Preview
+                    </div>
+                    <div class="panel-body">
+                        <div class="video-preview-container">
+                            <div class="progress-container" id="progress-container">
+                                <div class="progress-header">
+                                    <span>Generating Video...</span>
+                                    <span id="progress-percentage">0%</span>
+                                </div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progress-fill"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="video-preview">
+                                <div class="video-placeholder">
+                                    <div class="video-placeholder-icon floating">
+                                        <i class="fas fa-video"></i>
+                                    </div>
+                                    <h4 class="video-placeholder-text">Your Video Awaits</h4>
+                                    <p class="video-placeholder-subtext">Enter your text and click "Generate Video" to see the magic happen</p>
+                                </div>
+                                <!-- Video will be inserted here by JavaScript -->
+                            </div>
+                            
+                            <div class="video-controls">
+                                <button id="download-btn" class="btn btn-secondary" disabled>
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button id="share-btn" class="btn btn-secondary" disabled>
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                                <button id="save-btn" class="btn btn-primary" disabled>
+                                    <i class="fas fa-save"></i> Save Project
+                                </button>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="export-quality" class="form-label">Export Quality</label>
+                                <select id="export-quality" class="form-control">
+                                    <option value="1080p">1080p Full HD</option>
+                                    <option value="720p">720p HD</option>
+                                    <option value="480p">480p Standard</option>
+                                    <option value="4k">4K Ultra HD (Pro)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="export-format" class="form-label">Export Format</label>
+                                <select id="export-format" class="form-control">
+                                    <option value="mp4">MP4 (Recommended)</option>
+                                    <option value="mov">MOV</option>
+                                    <option value="gif">Animated GIF</option>
+                                    <option value="webm">WebM</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Video Creator</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card animate__animated animate__fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="feature-title">AI-Powered Creation</h3>
+                    <p>Our advanced AI analyzes your text and automatically creates visually stunning videos with perfect timing and transitions.</p>
+                </div>
+                
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="feature-icon">
+                        <i class="fas fa-sliders-h"></i>
+                    </div>
+                    <h3 class="feature-title">Customizable Levels</h3>
+                    <p>Choose from Basic to Pro levels to balance quality and processing time according to your specific needs.</p>
+                </div>
+                
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3 class="feature-title">Professional Templates</h3>
+                    <p>Select from dozens of professionally designed templates for different industries and use cases.</p>
+                </div>
+                
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-3s">
+                    <div class="feature-icon">
+                        <i class="fas fa-cloud-download-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Multiple Export Options</h3>
+                    <p>Download your videos in various formats and resolutions optimized for different platforms.</p>
+                </div>
+                
+                <div class="feature-card animate__animated animate__fadeInUp">
+                    <div class="feature-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="feature-title">Audio Integration</h3>
+                    <p>Add voiceovers and background music from our library or upload your own audio files.</p>
+                </div>
+                
+                <div class="feature-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="feature-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Easy Sharing</h3>
+                    <p>Share your videos directly to social media platforms or generate embed codes for websites.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <a href="/" class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <span class="footer-logo-text">VidCraft</span>
+                    </a>
+                    <p class="footer-about">Transforming text into engaging videos with the power of AI. Perfect for content creators, marketers, and educators.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Templates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Tutorials</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">API Docs</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                        <li><a href="#">DMCA</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 VidCraft. All rights reserved. | Made with <i class="fas fa-heart" style="color: var(--secondary);"></i> for content creators</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.querySelector('.nav-links');
+            const actions = document.querySelector('.header-actions');
+            
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+            actions.style.display = actions.style.display === 'flex' ? 'none' : 'flex';
+            
+            this.innerHTML = nav.style.display === 'flex' ? 
+                '<i class="fas fa-times"></i>' : 
+                '<i class="fas fa-bars"></i>';
+        });
+        
+        // Advanced Options Toggle
+        const advancedOptionsToggle = document.querySelector('.advanced-options-toggle');
+        const advancedOptions = document.querySelector('.advanced-options');
+        
+        advancedOptionsToggle.addEventListener('click', function() {
+            advancedOptions.classList.toggle('active');
+            this.querySelector('i').classList.toggle('fa-chevron-down');
+            this.querySelector('i').classList.toggle('fa-chevron-up');
+        });
+        
+        // Text-to-Video Generator Functionality
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const videoText = document.getElementById('video-text').value;
+            const creationLevel = document.querySelector('input[name="creation-level"]:checked').value;
+            const videoTemplate = document.querySelector('input[name="video-template"]:checked').value;
+            const videoTitle = document.getElementById('video-title').value;
+            
+            if (!videoText.trim()) {
+                alert('Please enter some text to generate a video.');
+                return;
+            }
+            
+            // Show loading state
+            const generateBtn = document.getElementById('generate-btn');
+            generateBtn.disabled = true;
+            generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            
+            // Show progress bar
+            const progressContainer = document.getElementById('progress-container');
+            const progressFill = document.getElementById('progress-fill');
+            const progressPercentage = document.getElementById('progress-percentage');
+            progressContainer.style.display = 'block';
+            
+            // Simulate video generation with progress updates
+            let progress = 0;
+            const interval = setInterval(function() {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                
+                progressFill.style.width = progress + '%';
+                progressPercentage.textContent = Math.round(progress) + '%';
+                
+                if (progress === 100) {
+                    clearInterval(interval);
+                    generateVideo();
+                }
+            }, 500);
+            
+            function generateVideo() {
+                // Create video element
+                const videoPreview = document.querySelector('.video-preview');
+                videoPreview.innerHTML = `
+                    <video controls poster="https://via.placeholder.com/800x450/212529/4361ee?text=${encodeURIComponent(videoTitle || 'Your Video')}">
+                        <source src="placeholder-video.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                `;
+                
+                // Hide progress bar
+                progressContainer.style.display = 'none';
+                
+                // Enable buttons
+                document.getElementById('download-btn').disabled = false;
+                document.getElementById('share-btn').disabled = false;
+                document.getElementById('save-btn').disabled = false;
+                
+                // Reset generate button
+                generateBtn.disabled = false;
+                generateBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Video';
+                
+                // Show success notification
+                showNotification('Video generated successfully!', 'success');
+            }
+        });
+        
+        // Download button functionality
+        document.getElementById('download-btn').addEventListener('click', function() {
+            showNotification('Video download started!', 'success');
+        });
+        
+        // Share button functionality
+        document.getElementById('share-btn').addEventListener('click', function() {
+            showNotification('Share options displayed', 'info');
+        });
+        
+        // Save button functionality
+        document.getElementById('save-btn').addEventListener('click', function() {
+            showNotification('Project saved successfully!', 'success');
+        });
+        
+        // Template selection animation
+        document.querySelectorAll('.template-option').forEach(option => {
+            option.addEventListener('click', function() {
+                this.querySelector('.template-option-preview').classList.add('animate__animated', 'animate__pulse');
+                
+                // Remove animation class after animation completes
+                setTimeout(() => {
+                    this.querySelector('.template-option-preview').classList.remove('animate__animated', 'animate__pulse');
+                }, 500);
+            });
+        });
+        
+        // Creation level tooltips
+        document.querySelectorAll('.level-option').forEach(option => {
+            option.addEventListener('mouseenter', function() {
+                const level = this.querySelector('input').id.split('-')[1];
+                let message = '';
+                
+                switch(level) {
+                    case 'basic':
+                        message = 'Basic: Fast processing (30-60 sec), simple visuals, suitable for quick social media posts.';
+                        break;
+                    case 'standard':
+                        message = 'Standard: Balanced quality and speed (1-2 min), with more visual elements and transitions.';
+                        break;
+                    case 'premium':
+                        message = 'Premium: Higher quality visuals (2-3 min), animations, custom transitions, and effects.';
+                        break;
+                    case 'pro':
+                        message = 'Pro: Highest quality (3-5 min) with advanced animations, custom assets, and professional effects.';
+                        break;
+                }
+                
+                // In a real app, you would show this as a proper tooltip
+                console.log(message);
+            });
+        });
+        
+        // Notification function
+        function showNotification(message, type) {
+            // In a real app, you would implement a proper notification system
+            console.log(`${type.toUpperCase()}: ${message}`);
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "VidCraft - AI Text-to-Video Creator",
+        "url": "https://yourwebsite.com",
+        "description": "Advanced AI-powered tool that converts text into professional-quality videos with customizable templates and creation levels.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "VidCraft"
+        },
+        "featureList": [
+            "AI-Powered Video Creation",
+            "Customizable Creation Levels",
+            "Professional Templates",
+            "Multiple Export Options",
+            "Audio Integration",
+            "Easy Sharing"
+        ]
+    }
+    </script>
+</body>
+</html>
